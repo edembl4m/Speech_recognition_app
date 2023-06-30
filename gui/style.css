@@ -1,0 +1,105 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(90deg, #b9deed, #efefef);
+}
+
+.container {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.btn_sec {
+  margin-top: 100px;
+  margin-bottom: 30px;
+}
+
+.main_button {
+  text-align: center;
+  align-items: center;
+  width: 120px;
+  margin: auto;
+}
+
+#start_rec {
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 0;
+  background-color: #efefef;
+  transition: 0.2s linear;
+  font-size: 40px;
+}
+
+.btn_border {
+  border-radius: 50%;
+  width: auto;
+  height: 120px;
+  width: 120px;
+  background-color: #b9deed;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0 auto;
+  box-shadow: 0 0 40px rgba(0,0,0,0.1)
+}
+
+#start_rec:hover {
+  height: 105px;
+  width: 105px;
+  font-size: 45px;
+}
+
+.text-output {
+  text-align: center;
+  font-family: 'Helvetica';
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.settings_form {
+  margin-top: 50px;
+}
+
+.heading {
+  text-align: center;
+  font-family: 'Helvetica';
+  font-weight: 900;
+  font-size: 25px;
+  margin-top: 50px;
+}
+
+select {
+  font-family: 'Helvetica';
+  font-weight: 900;
+  height: 40px;
+  border-radius: 50px;
+}
+
+option {
+  font-family: 'Helvetica';
+  font-weight: 900;
+}
+
+#set_btn {
+  height: 40px;
+  border-radius: 50px;
+}
+
+
+/* equalaizer */
+
+.equalizer{
+  margin: 0%;
+  min-height: 15vh;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.logo{
+  margin: 2px;
+  border-radius: 30px;
+}

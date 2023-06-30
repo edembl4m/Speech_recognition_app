@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Распознавание речи с микрофона</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="SHORTCUT ICON" href="/favicon.ico" type="image/x-icon">
+    <script src="eel.js"></script>
+    <script src="https://kit.fontawesome.com/c3c13452e0.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="main">
+        <div class="container">
+            <div class="settings_form">
+                <form action="#">
+                    <p>
+                        <select name="" id="microphone">
+                        </select>
+                        <select name="" id="type_rec">
+                            <option value="0">Vosk Small Model</option>
+                            <option value="1">Google Speech Recognition</option>
+                        </select>
+                        <input type="submit" name="" id="set_btn" value="Применить">
+                    </p>
+                </form>
+            </div>
+            <div class="heading">
+                <p>Выберите микрофон и способ распознавания</p>
+            </div>
+            <div class="btn_sec">
+                <div class="main_button">
+                    <div class="btn_border">
+                        <button id="start_rec"><i class="fa fa-microphone" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="equalizer"></div>
+            <div class="text-output">
+                <p id="output">Тут отобразиться распознанный текст...</p>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+
+        let submit_btn = document.querySelector("#set_btn");
+        submit_btn.addEventListener("click", send_settings);
+
+        async function send_settings() {
+            let mic = document.querySelector("#microphone").value;
+            let type_rec = document.querySelector("#type_rec").value;
+
+            await eel.recv_settings(mic, type_rec);
+        }
+
+
+        async function test_mic() {
+            await eel.get_microphone_list();
+        }
+
+        test_mic();
+
+        eel.expose(display_mic_list); 
+        function display_mic_list(list_mic) {
+            console.log(list_mic);
+            let mic_form_sel = document.querySelector("#microphone");
+            for (let i = 0; i < list_mic.length; i++) {
+                let mic_option = document.createElement('option')
+                mic_option.value = i;
+                mic_option.text = list_mic[i];
+                mic_form_sel.add(mic_option);
+            }
+        }
+
+
+        let start_btn = document.querySelector("#start_rec");
+        start_btn.addEventListener("click", start_recognition);
+
+        let equalizer_block = document.querySelector(".equalizer");
+
+        async function start_recognition() {
+            equalizer("старт");
+            let mic = document.querySelector("#microphone").value;
+            let type_rec = document.querySelector("#type_rec").value;
+            equalizer_block.style.visibility = 'visible';
+            await eel.main(mic, type_rec);
+        }
+
+        eel.expose(output_to_display);
+        function output_to_display(x) {
+            equalizer_block.style.visibility = 'hidden';
+            console.log(x);
+            let output_line = document.querySelector("#output");
+            output_line.innerHTML = x;
+        }
+
+    </script>
+    <script src="js/equalizer.js"></script>
+</body>
+</html>
